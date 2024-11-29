@@ -58,6 +58,12 @@ setup_wazuh_manager() {
 }
 
 config_wazuh_manager() {
+    # Validate variable
+    if [ -z "${TELEGRAM_API_TOKEN}" ]; then
+        echo "[-] Required parameters to configure Wazuh manager are missing. Check your configuration!."
+        exit 1
+    fi
+
     echo "[+] Adding configuration script to /var/ossec/etc/ossec.conf file..."
     tee -a /var/ossec/etc/ossec.conf << EOF
 <!-- Added by cilogs script -->
@@ -107,13 +113,13 @@ EOF
 
     # Move custom-telegram script to the integrations folder
     echo "[+] Moving 'custom-telegram' script to the integrations folder..."
-    mv ~/custom-telegram/* /var/ossec/integrations/
+    mv ~/custom-telegram* /var/ossec/integrations/
     echo -e "[+] Done.\n"
 
     # Enable the archive to visualize the events on the dashboard
     # Ref: https://documentation.wazuh.com/current/user-manual/manager/event-logging.html#visualizing-the-events-on-the-dashboard
     echo "[+] Enabling the archive feature..."
-    sed -i '/archives:/!b;n;c\      enabled: true' filebeat.yml
+    sed -i '/archives:/!b;n;c\      enabled: true' /etc/filebeat/filebeat.yml
     echo -e "[+] Done.\n"
 
     # Restart the Wazuh manager

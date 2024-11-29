@@ -105,7 +105,7 @@ setup_ctr() {
 
     # Install sshd on node 1 and node 3
     podman exec -it node1-ctr /bin/bash -c "dnf install -y openssh-server iputils vim net-tools ncurses rsyslog openssh-clients"
-    podman exec -it node3-ctr /bin/bash -c "dnf install -y openssh-server iputils vim net-tools ncurses rsyslog openssh-clients"
+    podman exec -it node3-ctr /bin/bash -c "dnf install -y openssh-server iputils vim net-tools ncurses rsyslog openssh-clients cronie"
 
     # Start the sshd service
     podman exec -it node1-ctr /bin/bash -c "systemctl enable --now sshd"

@@ -31,6 +31,12 @@ install_deps() {
 }
 
 config_autofs() {
+    # Validate variables
+    if [[ -z "${IP_NODE2}" || -z "${BACKUP_MOUNT_POINT}" ]]; then
+        echo "[-] Required parameters to configure autofs are missing. Check your configuration!."
+        exit 1
+    fi
+
     # Check if backup mount point exists
     if [ ! -d "${BACKUP_MOUNT_POINT}" ]; then
         echo "[-] Backup mount point does not exist."
@@ -57,6 +63,12 @@ config_autofs() {
 
 # Encrypt backed up compressed log file using GPG
 generate_gpg_key() {
+    # Validate variables
+    if [[ -z "${GPG_KEY_NAME}" || -z "${GPG_KEY_COMMENT}" || -z "${GPG_KEY_MAIL}" || -z "${GPG_KEY_PASSPHRASE}" ]]; then
+        echo "[-] Required parameters for generate GPG key are missing. Check your configuration!."
+        exit 1
+    fi
+
     # Generate new GPG key
     # Make sure that the GPG directory is exist
     if [ ! -d "${GPG_KEY_HOME}" ]; then
@@ -64,7 +76,7 @@ generate_gpg_key() {
         mkdir -pm700 "${GPG_KEY_HOME}"
     else 
         echo "[+] GPG directory exists. Skipping..."
-    fi
+    fi    
 
     # File batch untuk membuat kunci
 cat > gpg_key_batch << EOF
@@ -82,7 +94,6 @@ Passphrase: ${GPG_KEY_PASSPHRASE}
 %echo done
 EOF
 
-    #echo "DEBUG: ${GPG_KEY_COMMENT}"
     echo "[+] Generating new GPG key..."
     gpg --batch --generate-key gpg_key_batch
     gpg --list-keys | grep -q "${GPG_KEY_MAIL}"
@@ -96,6 +107,12 @@ EOF
 
 # Configure cron job to schedule backup log files as user provided + compressed backed up log files + encrypt the compressed log files
 create_cron_job() {
+    # Validate variables
+    if [[ -z "${BACKUP_IN_DAYS}" || -z "${COMPRESSED_LOG_DIR}" || -z "${BACKUP_MOUNT_POINT}" || "${GPG_KEY_MAIL}" ]]; then
+        echo "[-] Required parameters for create cronjob are missing. Check your configuration!."
+        exit 1
+    fi
+
     # Check if compressed log directory is exist
     if [ ! -d "${COMPRESSED_LOG_DIR}" ]; then
         echo "[-] Compressed log directory does not exist."

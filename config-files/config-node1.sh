@@ -25,6 +25,12 @@ config_repo() {
 
 # Install Wazuh agent on node 1
 install_wazuh_agent() {
+    # Validate variable
+    if [ -z "${IP_NODE2}" ]; then
+        echo "[-] Required parameters for install Wazuh agent are missing. Check your configuration!."
+        exit 1
+    fi
+
     # Import the Wazuh repo GPG key 
     echo "[+] Importing Wazuh GPG key..."
     rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
