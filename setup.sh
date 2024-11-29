@@ -24,6 +24,8 @@
 # 3. ./setup.sh                            #
 ############################################
 
+set a; source .env; set +a
+
 # Display the banner
 show_banner() {
     banner="

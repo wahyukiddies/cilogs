@@ -99,8 +99,8 @@ cp_file_to_all_nodes() {
 
     # Set the execute permission to custom-telegram script
     echo "[+] Setting file permission and ownership of custom-telegram script ..."
-    ssh -i ~/.ssh/node2 -p ${SSH_PORT_NODE2} root@${IP_NODE2} 'chmod 750 custom-telegram*'
-    ssh -i ~/.ssh/node2 -p ${SSH_PORT_NODE2} root@${IP_NODE2} 'chown root:wazuh custom-telegram*'
+    ssh -i ~/.ssh/node2 -p ${SSH_PORT_NODE2} root@${IP_NODE2} 'chmod 750 ~/custom-telegram*'
+    ssh -i ~/.ssh/node2 -p ${SSH_PORT_NODE2} root@${IP_NODE2} 'chown root:wazuh ~/custom-telegram*'
     echo -e "[+] Done.\n"
 }
 
