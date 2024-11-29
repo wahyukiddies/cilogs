@@ -47,7 +47,7 @@ config_autofs() {
 
     # Configure direct autofs method 
     echo "[+] Configuring autofs..."
-    echo "/- /etc/child.direct" > /etc/master.autofs # Create master map
+    echo "/- /etc/child.direct" > /etc/auto.master.d/master.autofs # Create master map
 
     echo "${BACKUP_MOUNT_POINT} -rw,sync,fstype=nfs4 ${IP_NODE2}:/var/ossec/logs" > /etc/child.direct # Create direct map
     systemctl enable --now autofs
@@ -108,7 +108,7 @@ EOF
 # Configure cron job to schedule backup log files as user provided + compressed backed up log files + encrypt the compressed log files
 create_cron_job() {
     # Validate variables
-    if [[ -z "${BACKUP_IN_DAYS}" || -z "${COMPRESSED_LOG_DIR}" || -z "${BACKUP_MOUNT_POINT}" || "${GPG_KEY_MAIL}" ]]; then
+    if [[ -z "${BACKUP_IN_DAYS}" || -z "${COMPRESSED_LOG_DIR}" || -z "${BACKUP_MOUNT_POINT}" || -z "${GPG_KEY_MAIL}" ]]; then
         echo "[-] Required parameters for create cronjob are missing. Check your configuration!."
         exit 1
     fi

@@ -134,10 +134,13 @@ EOF
 }
 
 config_nfs_server() {
-    echo "[+] Configuring NFS share..."
+    echo "[+] Configuring NFS server..."
 
     # Add the directory to the exports file
     echo "/var/ossec/logs/ *(rw,sync)" > /etc/exports
+
+    # Add read and execute permission to the logs directory
+    chmod -R o+rx /var/ossec/logs/
 
     # Restart the NFS server
     exportfs -rav

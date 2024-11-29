@@ -97,9 +97,16 @@ EOF
 }
 
 main() {
-    config_repo 
-    install_wazuh_agent 
-    config_wazuh_agent 
+    config_repo
+
+    # Check if the Wazuh agent is already installed
+    if [ -d /var/ossec/ ]; then
+        echo "[-] Wazuh agent is already installed. Skipping..."
+    else
+        install_wazuh_agent
+    fi
+
+    config_wazuh_agent
 }
 
 main # run the main function
