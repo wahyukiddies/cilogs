@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python
 
 import sys
 import json
@@ -7,11 +7,11 @@ from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 import os
 
-load_dotenv() # Load .env file located at home directory
+# Load environment variables
+load_dotenv()
 
-#CHAT_ID="xxxx" --> Modify this line with the chat id of the telegram group
-# You can get the chat id with the following url: https://sean-bradley.medium.com/get-telegram-chat-id-80b575520659
-CHAT_ID=os.getenv("GROUP_CHAT_ID") 
+#CHAT_ID="-xxxx" --- change with your chat id 
+CHAT_ID=str(os.getenv('GROUP_CHAT_ID'))
 
 # Read configuration parameters
 alert_file = open(sys.argv[1])
@@ -33,7 +33,6 @@ msg_data['text']['description'] =  description
 msg_data['text']['alert_level'] = str(alert_level)
 msg_data['text']['agent'] =  agent
 headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
-
 
 # Send the request
 requests.post(hook_url, headers=headers, data=json.dumps(msg_data))

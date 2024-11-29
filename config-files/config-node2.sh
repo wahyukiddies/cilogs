@@ -116,6 +116,12 @@ EOF
     mv ~/custom-telegram* /var/ossec/integrations/
     echo -e "[+] Done.\n"
 
+    # Change file ownership and permission of custom-telegram script
+    echo "[+] Changing file ownership of 'custom-telegram' script..."
+    chmod 750 /var/ossec/integrations/custom-telegram*
+    chown root:wazuh /var/ossec/integrations/custom-telegram*
+    echo -e "[+] Done.\n"
+
     # Enable the archive to visualize the events on the dashboard
     # Ref: https://documentation.wazuh.com/current/user-manual/manager/event-logging.html#visualizing-the-events-on-the-dashboard
     echo "[+] Enabling the archive feature..."
