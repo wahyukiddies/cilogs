@@ -7,8 +7,7 @@ from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 import os
 
-env_path="~/.env"
-load_dotenv(env_path) # Load .env file located at home directory
+load_dotenv() # Load .env file located at home directory
 
 #CHAT_ID="xxxx" --> Modify this line with the chat id of the telegram group
 # You can get the chat id with the following url: https://sean-bradley.medium.com/get-telegram-chat-id-80b575520659
