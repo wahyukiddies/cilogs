@@ -89,6 +89,9 @@ setup_ctr() {
     podman run -d --name node1-ctr --hostname node1 --network wazuh-net -p 2221:22 \
     -v /node1/log:/var/log:Z --privileged docker.io/redhat/ubi9-init /sbin/init
 
+    # Create mount point for node 3
+    mkdir -p /node3/log
+
     # Configure fcontext of mount point
     semanage fcontext -a -t container_file_t "/node3/log(/.*)?"
     restorecon -RFvv /node3/log
