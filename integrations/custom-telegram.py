@@ -4,14 +4,8 @@ import sys
 import json
 import requests
 from requests.auth import HTTPBasicAuth
-from dotenv import load_dotenv
-import os
 
-# Load environment variables
-load_dotenv()
-
-#CHAT_ID="-xxxx" --- change with your chat id 
-CHAT_ID=str(os.getenv('GROUP_CHAT_ID'))
+CHAT_ID="-xxxx" # Will be replaced with the value from GROUP_CHAT_ID in env file.
 
 # Read configuration parameters
 alert_file = open(sys.argv[1])

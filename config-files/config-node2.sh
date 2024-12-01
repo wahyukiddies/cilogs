@@ -112,14 +112,19 @@ config_wazuh_manager() {
 EOF
 
     # Move custom-telegram script to the integrations folder
-    echo "[+] Moving 'custom-telegram' script to the integrations folder..."
+    echo "[+] Moving custom-telegram script to the integrations folder..."
     mv ~/custom-telegram* /var/ossec/integrations/
     echo -e "[+] Done.\n"
 
     # Change file ownership and permission of custom-telegram script
-    echo "[+] Changing file ownership of 'custom-telegram' script..."
+    echo "[+] Changing file ownership of custom-telegram script..."
     chmod 750 /var/ossec/integrations/custom-telegram*
     chown root:wazuh /var/ossec/integrations/custom-telegram*
+    echo -e "[+] Done.\n"
+
+    # Replace the value of CHAT_ID in the python custom-telegram script
+    echo "[+] Replacing the value of 'CHAT_ID' in the python custom-telegram script..."
+    sed -i "s|-xxxx|$(grep -oP '^GROUP_CHAT_ID=\K.*' /root/.env)|g" /var/ossec/integrations/custom-telegram.py
     echo -e "[+] Done.\n"
 
     # Enable the archive to visualize the events on the dashboard
@@ -145,8 +150,9 @@ config_nfs_server() {
     # Add the directory to the exports file
     echo "/var/ossec/logs/ *(rw,sync)" > /etc/exports
 
-    # Add read and execute permission to the logs directory
-    chmod -R o+rx /var/ossec/logs/
+    # Configure file permission and ownership of Wazuh manager logs dir
+    chgrp -Rf root /var/ossec/logs/
+    chmod -Rf 775 /var/ossec/logs/
 
     # Restart the NFS server
     exportfs -rav
@@ -164,7 +170,7 @@ config_nfs_server() {
     showmount -e localhost
 
     # Add service to firewalld (if enabled)
-    systemctl is-enabled firewalld &> /dev/null
+    systemctl is-enabled --quiet firewalld
     if [[ $? -eq 0 ]]; then
         firewall-cmd --zone=public --add-service={mountd,nfs,rpc-bind} --permanent
         firewall-cmd --reload

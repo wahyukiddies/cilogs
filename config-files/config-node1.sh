@@ -87,6 +87,7 @@ EOF
     # Restart the Wazuh agent
     echo "[+] Restarting Wazuh agent..."
     systemctl restart wazuh-agent
+    systemctl is-active --quiet wazuh-agent
     if [[ $? -eq 0 ]]; then
         echo "[+] Restart Wazuh agent success!"
     else
