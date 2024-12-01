@@ -121,19 +121,24 @@ create_cron_job() {
         echo "[+] Compressed log directory exists. Skipping..."
     fi
 
-    # Create cron job to compress and encrypt log files according to the BACKUP_IN_DAYS variable
+    # Create cron job to compress and encrypt log files according to the ${BACKUP_IN_DAYS} variable
     echo "[+] Create cron job to performing automatic compress and encrypt log files..."
-    cat > /etc/cron.d/auto_compress_and_encrypt_log_files << EOF
-* * */${BACKUP_IN_DAYS} * * root tar -czf ${COMPRESSED_LOG_DIR}/backup_log_$(date +%Y-%m-%d).tar.gz ${BACKUP_MOUNT_POINT}/* && gpg --encrypt --recipient ${GPG_KEY_MAIL} ${COMPRESSED_LOG_DIR}/backup_log_$(date +%Y-%m-%d).tar.gz
+    chmod +x /root/backup-job.sh # Add execute permission to the backup-job.sh script
+    # Run the backup_job.sh script every ${BACKUP_IN_DAYS} days
+    crontab << EOF
+* * */${BACKUP_IN_DAYS} * * /root/backup-job.sh
 EOF
 
-    # Make sure the cron job has been created
-    if [ -f /etc/cron.d/auto_compress_and_encrypt_log_files ]; then
+    # Restart cron service
+    systemctl restart crond
+    systemctl is-active --quiet crond
+    if [[ $? -eq 0 ]]; then
         echo "[+] Cron job has been created successfully."
     else
         echo "[-] Failed to create cron job."
         exit 1
     fi
+
     echo -e "[+] Done.\n"
 }
 

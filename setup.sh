@@ -115,6 +115,9 @@ setup_ctr() {
     podman exec -it node1-ctr /bin/bash -c "systemctl enable --now rsyslog"
     podman exec -it node3-ctr /bin/bash -c "systemctl enable --now rsyslog"
 
+    # Start the crond service on node 3
+    podman exec -it node3-ctr /bin/bash -c "systemctl enable --now crond"
+
     # Change PermitRootLogin to yes on node 1 and node 3
     podman exec -it node1-ctr /bin/bash -c 'sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin yes|g" /etc/ssh/sshd_config'
     podman exec -it node3-ctr /bin/bash -c 'sed -i "s|#PermitRootLogin prohibit-password|PermitRootLogin yes|g" /etc/ssh/sshd_config'
@@ -168,11 +171,18 @@ main() {
     config_ntp # configure NTP server for node 2 (Wazuh manager)
     config_repo # configure the RHEL repository for node 2 (Wazuh manager)
     install_deps # install dependencies for node 2 (Wazuh manager)
-    setup_wazuh_manager # setup Wazuh manager on node 2 (Wazuh manager)
+    
+    # Check if Wazuh manager is already installed
+    if [ -d "/var/ossec" ]; then
+        echo "[-] Wazuh manager is already installed. Skipping..."
+    else
+        setup_wazuh_manager # setup Wazuh manager on node 2 (workstation)
+    fi
+
     setup_ctr # setup container for node 1 and node 3
 
     echo "[+] Setup completed."
-    echo "[!] Don't forget to copy the password of Wazuh manager."
+    echo "[!] Don't forget to copy the password of Wazuh manager!"
     echo "[!] Root password has been set on each nodes!"
     echo "[+] Thank you!"
 }

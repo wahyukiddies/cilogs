@@ -85,16 +85,21 @@ gen_and_cp_ssh_keys() {
 
 cp_file_to_all_nodes() {
     # Copy the .env file to all nodes
-    echo "[+] Copying the environment variables file to all nodes ..."
+    echo "[+] Copying the .env file to all nodes ..."
     scp -i ~/.ssh/node1 -P ${SSH_PORT_NODE1} .env root@${IP_NODE1}:~/
     scp -i ~/.ssh/node2 -P ${SSH_PORT_NODE2} .env root@${IP_NODE2}:~/
     scp -i ~/.ssh/node3 -P ${SSH_PORT_NODE3} .env root@${IP_NODE3}:~/
     echo -e "[+] Done.\n"
 
-    # Copy custom-telegram script to all nodes
-    echo "[+] Copying the custom-telegram script to node 2..."
+    # Copy custom-telegram script to node 2
+    echo "[+] Copying the custom-telegram script to node 2 home dir..."
     scp -i ~/.ssh/node2 -P ${SSH_PORT_NODE2} integrations/custom-telegram root@${IP_NODE2}:~/
     scp -i ~/.ssh/node2 -P ${SSH_PORT_NODE2} integrations/custom-telegram.py root@${IP_NODE2}:~/
+    echo -e "[+] Done.\n"
+
+    # Copy backup_job script to node 3
+    echo "[+] Copying the backup_job script to node 3 home dir..."
+    scp -i ~/.ssh/node3 -P ${SSH_PORT_NODE3} config-files/backup-job.sh root@${IP_NODE3}:~/
     echo -e "[+] Done.\n"
 }
 

@@ -4,44 +4,33 @@
   "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
   "elements": [
     {
-      "id": "GFVGKdazLylwMGV8bdGOA",
       "type": "arrow",
-      "x": 630.1061238141607,
-      "y": 175.25855102316052,
-      "width": 428.0700174967445,
-      "height": 2.229563395182282,
-      "angle": 0,
-      "strokeColor": "#f08c00",
-      "backgroundColor": "transparent",
+      "version": 129,
+      "versionNonce": 1227508275,
+      "isDeleted": false,
+      "id": "GFVGKdazLylwMGV8bdGOA",
       "fillStyle": "solid",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": 630.1061238141607,
+      "y": 175.25855102316052,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "width": 428.0700174967445,
+      "height": 2.229563395182282,
+      "seed": 1673582067,
       "groupIds": [],
       "frameId": null,
       "roundness": {
         "type": 2
       },
-      "seed": 1673582067,
-      "version": 129,
-      "versionNonce": 1227508275,
-      "isDeleted": false,
-      "boundElements": null,
+      "boundElements": [],
       "updated": 1732841320531,
       "link": null,
       "locked": false,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          428.0700174967445,
-          -2.229563395182282
-        ]
-      ],
-      "lastCommittedPoint": null,
       "startBinding": {
         "elementId": "Nlne2QIyat69kRKZ19O-h",
         "focus": -0.02167832462235822,
@@ -52,8 +41,19 @@
         "focus": -0.03332758976248651,
         "gap": 6.257468206976341
       },
+      "lastCommittedPoint": null,
       "startArrowhead": null,
-      "endArrowhead": "triangle"
+      "endArrowhead": "triangle",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          428.0700174967445,
+          -2.229563395182282
+        ]
+      ]
     },
     {
       "type": "arrow",
@@ -352,10 +352,6 @@
       "roundness": null,
       "boundElements": [
         {
-          "id": "CK50SoTwOoj2ejVOPZJjs",
-          "type": "arrow"
-        },
-        {
           "id": "Kh9cw2HY_xZ1JyN5G7z2g",
           "type": "arrow"
         }
@@ -571,12 +567,7 @@
       "groupIds": [],
       "frameId": null,
       "roundness": null,
-      "boundElements": [
-        {
-          "id": "CK50SoTwOoj2ejVOPZJjs",
-          "type": "arrow"
-        }
-      ],
+      "boundElements": [],
       "updated": 1732841222375,
       "link": null,
       "locked": false
@@ -681,12 +672,7 @@
       ],
       "frameId": null,
       "roundness": null,
-      "boundElements": [
-        {
-          "id": "CK50SoTwOoj2ejVOPZJjs",
-          "type": "arrow"
-        }
-      ],
+      "boundElements": [],
       "updated": 1732841222375,
       "link": null,
       "locked": false,
@@ -1013,10 +999,6 @@
         {
           "type": "text",
           "id": "q2WcHQdc8SHNyt3rwfnYd"
-        },
-        {
-          "id": "CK50SoTwOoj2ejVOPZJjs",
-          "type": "arrow"
         }
       ],
       "updated": 1732841222375,
@@ -1410,8 +1392,8 @@
     },
     {
       "type": "rectangle",
-      "version": 1642,
-      "versionNonce": 1412248285,
+      "version": 1915,
+      "versionNonce": 978671273,
       "isDeleted": false,
       "id": "OmJ_rGZfR77O3NqbfSvCv",
       "fillStyle": "solid",
@@ -1420,11 +1402,11 @@
       "roughness": 0,
       "opacity": 100,
       "angle": 0,
-      "x": -512.3520751053734,
-      "y": 300.219659141516,
+      "x": -428.1416258866234,
+      "y": 300.2854550399535,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "#ffc9c9",
-      "width": 378.1846373194968,
+      "width": 204.13864732926243,
       "height": 37,
       "seed": 1038860396,
       "groupIds": [],
@@ -1438,14 +1420,14 @@
           "id": "Yi9rOxo7V-D5MHn8YuRuU"
         }
       ],
-      "updated": 1732841222375,
+      "updated": 1732891187739,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 1362,
-      "versionNonce": 916043123,
+      "version": 1671,
+      "versionNonce": 1621531017,
       "isDeleted": false,
       "id": "Yi9rOxo7V-D5MHn8YuRuU",
       "fillStyle": "hachure",
@@ -1454,27 +1436,27 @@
       "roughness": 0,
       "opacity": 100,
       "angle": 0,
-      "x": -500.886709570625,
-      "y": 305.219659141516,
+      "x": -420.7158569094922,
+      "y": 305.2854550399535,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 355.25390625,
+      "width": 189.287109375,
       "height": 27,
       "seed": 569430764,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1732841222375,
+      "updated": 1732891187739,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 6,
-      "text": "ssh brute force attack and port scanning",
+      "text": "ssh brute force attack",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "OmJ_rGZfR77O3NqbfSvCv",
-      "originalText": "ssh brute force attack and port scanning",
+      "originalText": "ssh brute force attack",
       "lineHeight": 1.35,
       "baseline": 22
     },
@@ -2070,12 +2052,7 @@
       "roundness": {
         "type": 3
       },
-      "boundElements": [
-        {
-          "id": "CK50SoTwOoj2ejVOPZJjs",
-          "type": "arrow"
-        }
-      ],
+      "boundElements": [],
       "updated": 1732841222376,
       "link": null,
       "locked": false
